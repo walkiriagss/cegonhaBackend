@@ -1,0 +1,38 @@
+const db = require("../config/database");
+
+// ==> Método responsável por criar um novo 'Ubs':
+
+exports.createUbs = async (req, res) => {
+  const { nome, telefone, id_endereco} = req.body;
+  const { rows } = await db.query(
+    "INSERT INTO ubs (nome, telefone, id_endereco) VALUES ($1, $2, $3)",
+    [nome, telefone, id_endereco]
+  );
+  res.status(201).send({
+    ubs: { nome, telefone, id_endereco }
+  });
+};
+// ==> Método responsável por listar todos os 'ubs':
+exports.listAllUbs = async (req, res) => {
+    const response = await db.query('SELECT * FROM ubs ORDER BY nome ASC ');
+    res.status(200).send(response.rows);
+};
+
+// ==> Método responsável por selecionar 'ubs' pelo 'id':
+exports.findUbsById = async (req, res) => {
+  const id = req.params.id;
+  const response = await db.query('SELECT * FROM ubs WHERE id = $1', [id]);
+  res.status(200).send(response.rows);
+}
+// ==> Método responsável por atualizar um 'ubs' pelo 'id':
+exports.updateUbsById = async (req, res) => {
+  const id = req.params.id;
+  const { nome, telefone, id_endereco} = req.body;
+  
+  const response = await db.query(
+    "UPDATE ubs SET nome = $1, telefone = $2, id_endereco = $3, WHERE id = $4",
+    [nome, telefone, id_endereco, id]
+  );
+
+  res.status(200).send({ message: "Atualização realizada com sucesso!" });
+};
