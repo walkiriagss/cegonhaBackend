@@ -8,9 +8,9 @@
     "npm": "6.14.4"
   },
   "scripts": {
-  "build": "bower install && grunt build",
-  "start": "nf start"
-},
+
+    "start": "node server.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
