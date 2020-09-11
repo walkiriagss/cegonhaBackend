@@ -12,11 +12,13 @@ const hospitalRoute = require('./rotes/hospital');
 const enderecoCobertoRoute = require('./rotes/enderecoCoberto');
 const regiaoRoute = require('./rotes/descobertos');
 const ubsRoute = require('./rotes/ubs');
+const telefoneRoute = require('./rotes/telefones');
+const infoRoute = require('./rotes/info');
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use(express.json({ type: 'application/vnd.api+json' }));
-app.use(cors({origin:true,credentials: true}));
+app.use(express.json({type: 'application/vnd.api+json'}));
+app.use(cors({origin: true, credentials: true}));
 app.use(index);
 app.use('/api/', userRoute);
 app.use('/api/', loginRoute);
@@ -24,6 +26,8 @@ app.use('/api/', enderecoRoute);
 app.use('/api/', hospitalRoute);
 app.use('/api/', enderecoCobertoRoute);
 app.use('/api/', regiaoRoute);
-app.use('/api/', ubsRoute)
+app.use('/api/', ubsRoute);
+app.use('/api/', telefoneRoute);
+app.use('/api/', infoRoute);
 
 module.exports = app;

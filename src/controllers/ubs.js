@@ -17,6 +17,12 @@ exports.listAllUbs = async (req, res) => {
     const response = await db.query('SELECT * FROM ubs ORDER BY nome ASC ');
     res.status(200).send(response.rows);
 };
+// ==>Método responsável por filtrar ubs por nome
+exports.listUbsName = async (req, res) => {
+  const nomeUbs = req.params.nomeUbs;
+  const response = await db.query( "SELECT * FROM ubs WHERE nome LIKE '%" +nomeUbs +"%' ORDER BY nome ASC ",);
+  res.status(200).send(response.rows);
+};
 
 // ==> Método responsável por selecionar 'ubs' pelo 'id':
 exports.findUbsById = async (req, res) => {
@@ -35,4 +41,13 @@ exports.updateUbsById = async (req, res) => {
   );
 
   res.status(200).send({ message: "Atualização realizada com sucesso!" });
+};
+// ==> Método responsável por excluir um 'UBS' pelo 'Id':
+exports.deleteUbsById = async (req, res) => {
+  const ubsId = parseInt(req.params.id);
+  await db.query('DELETE FROM ubs WHERE id = $1', [
+    ubsId
+  ]);
+
+  res.status(200).send({ message: 'Ubs deleted successfully!', ubsId });
 };
