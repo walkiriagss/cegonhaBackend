@@ -39,6 +39,8 @@ exports.updateUbsById = async (req, res) => {
     "UPDATE ubs SET nome = $1, telefone = $2, id_endereco = $3 WHERE id = $4",
     [nome, telefone, id_endereco, id]
   );
+
+  res.status(200).send({ message: "Atualização realizada com sucesso!" });
 };
 // ==> Método responsável por excluir um 'UBS' pelo 'Id':
 exports.deleteUbsById = async (req, res) => {
