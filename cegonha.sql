@@ -4,7 +4,7 @@ CREATE TABLE login
     nome varchar(50) NOT NULL,
     cpf varchar(14) NOT NULL,
     usuario varchar(255) NOT NULL,
-    senha varchar(20) NOT NULL,   
+    senha varchar(100) NOT NULL,   
     PRIMARY KEY (id),
     UNIQUE (cpf, usuario)
 );

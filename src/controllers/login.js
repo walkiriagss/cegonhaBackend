@@ -64,9 +64,7 @@ exports.authenticate = async (req, res) => {
 // ==> Método responsável por excluir um 'login' pelo 'Id':
 exports.deleteLoginById = async (req, res) => {
   const loginId = parseInt(req.params.id);
-  await db.query('DELETE FROM login WHERE id = $1', [
-   loginId
-  ]);
+  await db.query('DELETE FROM login WHERE id = $1', [loginId]);
 
-  res.status(200).send({ message: 'Login deleted successfully!', loginId });
+  res.status(200).send({message: 'Login deleted successfully!', loginId});
 };
