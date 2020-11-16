@@ -3,13 +3,13 @@ const db = require('../config/database');
 // ==> Método responsável por criar um novo 'hospital':
 
 exports.createHospital = async (req, res) => {
-  const {nome, telefone, id_endereco} = req.body;
+  const {nome, telefone, id_endereco, latitude, longitude} = req.body;
   const {rows} = await db.query(
-    'INSERT INTO hospital (nome, telefone, id_endereco) VALUES ($1, $2, $3)',
-    [nome, telefone, id_endereco],
+    'INSERT INTO hospital (nome, telefone, id_endereco, latitude, longitude) VALUES ($1, $2, $3, $4, $5)',
+    [nome, telefone, id_endereco, latitude, longitude],
   );
   res.status(201).send({
-    hospital: {nome, telefone, id_endereco},
+    hospital: {nome, telefone, id_endereco, latitude, longitude},
   });
 };
 // ==> Método responsável por filtrar 'hospital' por nome:
@@ -39,11 +39,11 @@ exports.findHospitalById = async (req, res) => {
 // ==> Método responsável por atualizar um 'hospital' pelo 'id':
 exports.updateHospitalById = async (req, res) => {
   const id = req.params.id;
-  const {nome, telefone, id_endereco} = req.body;
+  const {nome, telefone, id_endereco, latitude, longitude} = req.body;
 
   const response = await db.query(
-    'UPDATE hospital SET nome = $1, telefone = $2, id_endereco = $3 WHERE id = $4',
-    [nome, telefone, id_endereco, id],
+    'UPDATE hospital SET nome = $1, telefone = $2, id_endereco = $3, latitude = $4, longitude = $5 WHERE id = $6',
+    [nome, telefone, id_endereco, latitude, longitude, id],
   );
 
   res.status(200).send({message: 'Atualização realizada com sucesso!'});
