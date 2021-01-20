@@ -1,12 +1,21 @@
+CREATE TABLE roles 
+(
+    id serial NOT NULL,
+    role varchar(50) NOT NULL,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE login
 (
     id serial NOT NULL,
     nome varchar(50) NOT NULL,
     cpf varchar(14) NOT NULL,
     usuario varchar(255) NOT NULL,
-    senha varchar(100) NOT NULL,   
+    senha varchar(255) NOT NULL,   
+    id_role integer,
     PRIMARY KEY (id),
-    UNIQUE (cpf, usuario)
+    UNIQUE (cpf, usuario),
+    FOREIGN KEY (id_role) REFERENCES roles(id)
 );
 
 CREATE TABLE endereco
@@ -32,30 +41,24 @@ CREATE TABLE users
     celular varchar(14),
     email varchar(50),
     id_endereco integer,
-    PRIMARY KEY (id),
     UNIQUE (cpf),
-    FOREIGN KEY (id_endereco) REFERENCES endereco(id)
+    FOREIGN KEY (id_endereco) REFERENCES endereco(id),
+    PRIMARY KEY (id)
 );
 
-CREATE TABLE hospital
+CREATE TABLE centro_medico
 (
     id serial NOT NULL,
     nome varchar(50) NOT NULL,
     telefone varchar(10),
-    id_endereco integer,
+    id_endereco integer NOT NULL,
+    tipo varchar(50) NOT NULL,
+    latitude real,
+    longitude real,
     PRIMARY KEY (id),
     FOREIGN KEY (id_endereco) REFERENCES endereco(id)
 );
 
-CREATE TABLE ubs
-(
-    id serial NOT NULL,
-    nome varchar(50) NOT NULL,
-    telefone varchar(10),
-    id_endereco integer,
-    PRIMARY KEY (id),
-    FOREIGN KEY (id_endereco) REFERENCES endereco(id)
-);
 
 CREATE TABLE enderecoCobertura
 (
@@ -67,11 +70,9 @@ CREATE TABLE enderecoCobertura
     cidade varchar(255) NOT NULL,
     estado varchar(255) NOT NULL,
     cep varchar(20) NOT NULL,
-    id_hospital integer,
-    id_ubs integer,
+    id_centro_medico integer,
     PRIMARY KEY (id),
-    FOREIGN KEY (id_hospital) REFERENCES hospital(id),
-    FOREIGN KEY (id_ubs) REFERENCES ubs(id)
+    FOREIGN KEY (id_centro_medico) REFERENCES centro_medico(id)
 );
 
 CREATE TABLE descobertos
@@ -79,10 +80,8 @@ CREATE TABLE descobertos
     id serial NOT NULL,
     bairro varchar(255) NOT NULL,
     regiao varchar(255) NOT NULL,
-    id_hospital integer,
-    id_ubs integer,
-    FOREIGN KEY (id_hospital) REFERENCES hospital(id),
-    FOREIGN KEY (id_ubs) REFERENCES ubs(id),
+    id_centro_medico integer,
+    FOREIGN KEY (id_centro_medico) REFERENCES centro_medico(id),
     PRIMARY KEY (id)
 );
 

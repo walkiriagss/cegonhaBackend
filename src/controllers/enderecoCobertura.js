@@ -11,12 +11,11 @@ exports.createEnderecoCoberto = async (req, res) => {
     cidade,
     estado,
     cep,
-    id_hospital,
-    id_ubs,
+    id_centro_medico
   } = req.body;
 
   const {rows} = await db.query(
-    'INSERT INTO enderecocobertura (rua, numero_inicio, numero_fim, bairro, cidade, estado, cep, id_hospital, id_ubs) VALUES ($1, $2, $3, $4, $5, $6, $7,$8, $9)',
+    'INSERT INTO enderecocobertura (rua, numero_inicio, numero_fim, bairro, cidade, estado, cep, id_centro_medico) VALUES ($1, $2, $3, $4, $5, $6, $7,$8)',
     [
       rua,
       numero_inicio,
@@ -25,8 +24,7 @@ exports.createEnderecoCoberto = async (req, res) => {
       cidade,
       estado,
       cep,
-      id_hospital,
-      id_ubs,
+      id_centro_medico,
     ],
   );
 
@@ -39,8 +37,7 @@ exports.createEnderecoCoberto = async (req, res) => {
       cidade,
       estado,
       cep,
-      id_hospital,
-      id_ubs,
+      id_centro_medico,
     },
   });
 };
@@ -70,12 +67,11 @@ exports.updateEnderecoById = async (req, res) => {
     cidade,
     estado,
     cep,
-    id_hospital,
-    id_ubs,
+    id_centro_medico,
   } = req.body;
 
   const response = await db.query(
-    'UPDATE enderecocobertura SET rua = $1, numero_inicio = $2, numero_fim = $3, bairro = $4, cidade = $5, estado = $6, cep = $7, id_hospital= $8, id_ubs=$9 WHERE id = $10',
+    'UPDATE enderecocobertura SET rua = $1, numero_inicio = $2, numero_fim = $3, bairro = $4, cidade = $5, estado = $6, cep = $7, id_centro_medico = $8 WHERE id = $10',
     [
       rua,
       numero_inicio,
@@ -84,8 +80,7 @@ exports.updateEnderecoById = async (req, res) => {
       cidade,
       estado,
       cep,
-      id_hospital,
-      id_ubs,
+      id_centro_medico,
       id,
     ],
   );
@@ -97,8 +92,10 @@ exports.updateEnderecoById = async (req, res) => {
 exports.deleteEnderecoCobertoById = async (req, res) => {
   const enderecoCobertoId = parseInt(req.params.id);
   await db.query('DELETE FROM enderecoCobertura WHERE id = $1', [
-    enderecoCobertoId
+    enderecoCobertoId,
   ]);
 
-  res.status(200).send({ message: 'Endereço deleted successfully!', enderecoCobertoId });
+  res
+    .status(200)
+    .send({message: 'Endereço deleted successfully!', enderecoCobertoId});
 };

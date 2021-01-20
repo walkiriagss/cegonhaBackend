@@ -11,9 +11,9 @@ const enderecoRoute = require('./rotes/endereco');
 const hospitalRoute = require('./rotes/hospital');
 const enderecoCobertoRoute = require('./rotes/enderecoCoberto');
 const regiaoRoute = require('./rotes/descobertos');
-const ubsRoute = require('./rotes/ubs');
 const telefoneRoute = require('./rotes/telefones');
 const infoRoute = require('./rotes/info');
+const rouleRoute = require('./rotes/roles');
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
@@ -26,8 +26,8 @@ app.use('/api/', enderecoRoute);
 app.use('/api/', hospitalRoute);
 app.use('/api/', enderecoCobertoRoute);
 app.use('/api/', regiaoRoute);
-app.use('/api/', ubsRoute);
 app.use('/api/', telefoneRoute);
 app.use('/api/', infoRoute);
+app.use('/api/', rouleRoute);
 
 module.exports = app;

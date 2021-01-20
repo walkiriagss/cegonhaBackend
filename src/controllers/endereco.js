@@ -64,9 +64,7 @@ exports.findHospital = async (req, res) => {
 // ==> Método responsável por excluir um 'Endereço' pelo 'Id':
 exports.deleteEnderecoById = async (req, res) => {
   const enderecoId = parseInt(req.params.id);
-  await db.query('DELETE FROM endereco WHERE id = $1', [
-    enderecoId
-  ]);
+  await db.query('DELETE FROM endereco WHERE id = $1', [enderecoId]);
 
-  res.status(200).send({ message: 'Endereço deleted successfully!', enderecoId });
+  res.status(200).send({message: 'Endereço deleted successfully!', enderecoId});
 };

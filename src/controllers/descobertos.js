@@ -3,15 +3,15 @@ const db = require('../config/database');
 // ==> Método responsável por criar uma nova 'Região descoberta':
 
 exports.createRegiaoDescoberta = async (req, res) => {
-  const {bairro, regiao, id_hospital, id_ubs} = req.body;
+  const {bairro, regiao, id_centro_medico} = req.body;
 
   const {rows} = await db.query(
-    'INSERT INTO descobertos (bairro, regiao, id_hospital, id_ubs) VALUES ($1, $2, $3, $4) RETURNING id',
-    [bairro, regiao, id_hospital, id_ubs],
+    'INSERT INTO descobertos (bairro, regiao, id_centro_medico) VALUES ($1, $2, $3, $4) RETURNING id',
+    [bairro, regiao, id_centro_medico],
   );
   const id = rows[0].id;
   res.status(201).send({
-    endereco: {bairro, regiao, id_hospital, id_ubs, id},
+    endereco: {bairro, regiao, id_centro_medico, id},
   });
 };
 // ==> Método responsável por listar todas as 'Região descoberta':
@@ -34,8 +34,8 @@ exports.updateRegiaoDescobertaById = async (req, res) => {
   const {bairro, regiao, id_hospital, id_ubs} = req.body;
 
   const response = await db.query(
-    'UPDATE descobertos SET bairro = $1, regiao = $2, id_hospital = $3, id_ubs = $4 WHERE id = $5',
-    [bairro, regiao, id_hospital, id_ubs, id],
+    'UPDATE descobertos SET bairro = $1, regiao = $2, id_centro_medico = $3 WHERE id = $5',
+    [bairro, regiao, id_centro_medico, id],
   );
 
   res.status(200).send({message: 'Atualização realizada com sucesso!'});
@@ -45,8 +45,10 @@ exports.updateRegiaoDescobertaById = async (req, res) => {
 exports.deleteEnderecoDescobertoById = async (req, res) => {
   const enderecoDescobertoId = parseInt(req.params.id);
   await db.query('DELETE FROM descobertos WHERE id = $1', [
-    enderecoDescobertoId
+    enderecoDescobertoId,
   ]);
 
-  res.status(200).send({ message: 'Endereço deleted successfully!', enderecoDescobertoId });
+  res
+    .status(200)
+    .send({message: 'Endereço deleted successfully!', enderecoDescobertoId});
 };
