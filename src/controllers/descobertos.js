@@ -3,15 +3,15 @@ const db = require('../config/database');
 // ==> Método responsável por criar uma nova 'Região descoberta':
 
 exports.createRegiaoDescoberta = async (req, res) => {
-  const {bairro, regiao, id_centro_medico} = req.body;
+  const {bairro, regiao,  id_centro_medico_parto, id_centro_medico_pre_natal} = req.body;
 
   const {rows} = await db.query(
-    'INSERT INTO descobertos (bairro, regiao, id_centro_medico) VALUES ($1, $2, $3, $4) RETURNING id',
-    [bairro, regiao, id_centro_medico],
+    'INSERT INTO descobertos (bairro, regiao, id_centro_medico_parto, id_centro_medico_pre_natal) VALUES ($1, $2, $3, $4) RETURNING id',
+    [bairro, regiao, id_centro_medico_parto, id_centro_medico_pre_natal],
   );
   const id = rows[0].id;
   res.status(201).send({
-    endereco: {bairro, regiao, id_centro_medico, id},
+    endereco: {bairro, regiao, id_centro_medico_parto, id_centro_medico_pre_natal, id},
   });
 };
 // ==> Método responsável por listar todas as 'Região descoberta':
@@ -34,8 +34,8 @@ exports.updateRegiaoDescobertaById = async (req, res) => {
   const {bairro, regiao, id_hospital, id_ubs} = req.body;
 
   const response = await db.query(
-    'UPDATE descobertos SET bairro = $1, regiao = $2, id_centro_medico = $3 WHERE id = $5',
-    [bairro, regiao, id_centro_medico, id],
+    'UPDATE descobertos SET bairro = $1, regiao = $2, id_centro_medico_parto = $3, id_centro_medico_pre_natal = $4 WHERE id = $5',
+    [bairro, regiao, id_centro_medico_parto, id_centro_medico_pre_natal, id],
   );
 
   res.status(200).send({message: 'Atualização realizada com sucesso!'});

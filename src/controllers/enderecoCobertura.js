@@ -11,11 +11,12 @@ exports.createEnderecoCoberto = async (req, res) => {
     cidade,
     estado,
     cep,
-    id_centro_medico
+    id_centro_medico_parto, 
+    id_centro_medico_pre_natal
   } = req.body;
 
   const {rows} = await db.query(
-    'INSERT INTO enderecocobertura (rua, numero_inicio, numero_fim, bairro, cidade, estado, cep, id_centro_medico) VALUES ($1, $2, $3, $4, $5, $6, $7,$8)',
+    'INSERT INTO enderecocobertura (rua, numero_inicio, numero_fim, bairro, cidade, estado, cep,  id_centro_medico_parto, id_centro_medico_pre_natal) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
     [
       rua,
       numero_inicio,
@@ -24,7 +25,8 @@ exports.createEnderecoCoberto = async (req, res) => {
       cidade,
       estado,
       cep,
-      id_centro_medico,
+      id_centro_medico_parto, 
+      id_centro_medico_pre_natal
     ],
   );
 
@@ -37,7 +39,8 @@ exports.createEnderecoCoberto = async (req, res) => {
       cidade,
       estado,
       cep,
-      id_centro_medico,
+      id_centro_medico_parto, 
+      id_centro_medico_pre_natal
     },
   });
 };
@@ -67,11 +70,12 @@ exports.updateEnderecoById = async (req, res) => {
     cidade,
     estado,
     cep,
-    id_centro_medico,
+    id_centro_medico_parto, 
+    id_centro_medico_pre_natal
   } = req.body;
 
   const response = await db.query(
-    'UPDATE enderecocobertura SET rua = $1, numero_inicio = $2, numero_fim = $3, bairro = $4, cidade = $5, estado = $6, cep = $7, id_centro_medico = $8 WHERE id = $10',
+    'UPDATE enderecocobertura SET rua = $1, numero_inicio = $2, numero_fim = $3, bairro = $4, cidade = $5, estado = $6, cep = $7,  id_centro_medico_parto = $8, id_centro_medico_pre_natal = $9 WHERE id = $10',
     [
       rua,
       numero_inicio,
@@ -80,7 +84,8 @@ exports.updateEnderecoById = async (req, res) => {
       cidade,
       estado,
       cep,
-      id_centro_medico,
+      id_centro_medico_parto, 
+      id_centro_medico_pre_natal,
       id,
     ],
   );
