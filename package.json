@@ -27,6 +27,7 @@
     "express-promise-router": "^3.0.3",
     "foobar": "1.1.0",
     "http-status": "^1.4.2",
+    "jsonwebtoken": "8.5.1",
     "passport-local": "^1.0.0",
     "pg": "^8.3.0",
     "pg-hstore": "^2.3.3",
