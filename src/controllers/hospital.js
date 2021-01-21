@@ -41,7 +41,7 @@ exports.updateHospitalById = async (req, res) => {
   const {nome, telefone, id_endereco, tipo, latitude, longitude} = req.body;
 
   const response = await db.query(
-    'UPDATE centro_medico SET nome = $1, telefone = $2, id_endereco = $3, tipo =$3, latitude = $4, longitude = $5 WHERE id = $6',
+    'UPDATE centro_medico SET nome = $1, telefone = $2, id_endereco = $3, tipo =$4, latitude = $5, longitude = $6 WHERE id = $7',
     [nome, telefone, id_endereco, tipo, latitude, longitude, id],
   );
 
