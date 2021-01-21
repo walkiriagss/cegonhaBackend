@@ -1,7 +1,7 @@
 const db = require('../config/database');
 const bcrypt = require('bcryptjs'); //criptografia de senha
 const express = require('express');
-var jwt = require('jsonwebtoken');
+//var jwt = require('jsonwebtoken');
 const { response } = require('express');
 const saltRounds = 10 //Definindo o valor de caracteres:
 // ==> Método responsável por criar um novo 'Login':
