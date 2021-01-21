@@ -31,7 +31,7 @@ exports.findRegiaoDescobertaById = async (req, res) => {
 // ==> Método responsável por atualizar um 'Região descoberta' pelo 'id':
 exports.updateRegiaoDescobertaById = async (req, res) => {
   const id = req.params.id;
-  const {bairro, regiao, id_centro_medico_parto, id_centro_medico_pre_natalgh} = req.body;
+  const {bairro, regiao, id_centro_medico_parto, id_centro_medico_pre_natal} = req.body;
 
   const response = await db.query(
     'UPDATE descobertos SET bairro = $1, regiao = $2, id_centro_medico_parto = $3, id_centro_medico_pre_natal = $4 WHERE id = $5',
