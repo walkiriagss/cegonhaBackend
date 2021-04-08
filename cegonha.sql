@@ -55,6 +55,7 @@ CREATE TABLE centro_medico
     tipo varchar(50) NOT NULL,
     latitude real,
     longitude real,
+    foto varchar(255),
     PRIMARY KEY (id),
     FOREIGN KEY (id_endereco) REFERENCES endereco(id)
 );
